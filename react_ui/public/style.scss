@@ -1,0 +1,119 @@
+* {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body, #root {
+    height: 100%;
+    background: #e5e5e5;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
+
+h1 {
+    font-weight: 200;
+    color: #282c34;
+    font-size: 20px;
+}
+
+.app {
+    white-space: nowrap;
+    height: 100%;
+}
+
+.teamBox {
+    font-size: 1vw;
+    border-style: solid;
+    border-color: #a5d2ea;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+
+.teamBox:hover {
+    border-color: #2876a1;
+}
+
+.myButton {
+    background-color: #1f5774 !important;
+    font-size: 1.5vw
+}
+
+.myButton:hover {
+    background-color: #12415a !important;
+}
+
+.buttonCell {
+    background-color: #868e98;
+}
+
+.buttonCell:hover {
+    background-color: #eff3f8;
+}
+
+.input-group-prepend {
+    width : 50%; /*adjust as needed*/
+}
+
+.input-group-append {
+    width : 50%; /*adjust as needed*/
+}
+
+/* SWITCH */
+/*
+input[type=checkbox]{
+    visibility: hidden;
+}
+label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 50px;
+    height: 25px;
+    background: #bada55;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+}
+label:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 100px;
+    transition: 0.3s;
+}
+input:checked + label {
+    background: #440ad3;
+}
+input:checked + label:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+}
+*/
+/*
+    <div className="d-flex">
+        <input type="checkbox" id="switch" onChange={this.props.functions.actualizeApiVersion}/>
+        <label htmlFor="switch">Toggle</label>
+    </div>
+    <h6 className="pl-1" style={{color: "#e6eee9"}}>{this.props.apiVersion}</h6>
+*/
+
+
+
+
+
+
+
+
+
+
+

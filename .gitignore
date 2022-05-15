@@ -1,0 +1,12 @@
+.idea
+
+react_ui/.idea
+react_ui/node_modules
+
+python_api/.idea
+python_api/__pycache__
+
+scala_api/.idea
+scala_api/.bsp
+scala_api/target
+
