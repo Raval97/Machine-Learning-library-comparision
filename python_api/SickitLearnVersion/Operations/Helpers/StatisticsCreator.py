@@ -28,8 +28,8 @@ def textColumnsSummaryFromNames(name, data):
     distinct = data.nunique().get(key = name)
     bestName = valueCounts.index[0]
     bestCount = valueCounts[0]
-    secondName = valueCounts.index[0]
-    secondCount = valueCounts[0]
+    secondName = valueCounts.index[1]
+    secondCount = valueCounts[1]
     mostCommons = [
         IntStringTuple(bestName, str(bestCount/count)),
         IntStringTuple(secondName, str(secondCount/count))
