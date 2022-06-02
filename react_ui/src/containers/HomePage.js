@@ -17,7 +17,8 @@ class HomePage extends Component {
                 typeOfProblem: "Regression",
                 method: "",
                 trainSize: 0.7,
-                maxCategories: 4
+                maxCategories: 4,
+                standardization: "None"
             },
             label: "",
             numberFeatures: [],
@@ -72,6 +73,22 @@ class HomePage extends Component {
                 label: param
             })
         }
+    }
+
+    setAllAvailableFeatures() {
+        let numberCols = this.props.dataStatistics.numberColumnsSummary.map(row => row.name)
+        let textCols = this.props.dataStatistics.textColumnSummary.map(row => row.name)
+        this.setState({
+            numberFeatures: numberCols,
+            textFeatures: textCols
+        })
+    }
+
+    setFeaturesEmpty() {
+        this.setState({
+            numberFeatures: [],
+            textFeatures: []
+        })
     }
 
     onChangeNumberFeatures(param) {
@@ -181,7 +198,6 @@ class HomePage extends Component {
     }
 
     async makePredict() {
-        console.log("makePredict")
         await this.props.functions.predict(
             this.state.options.typeOfProblem,
             this.state.options.method,
@@ -238,23 +254,25 @@ class HomePage extends Component {
                     }}
                 />
             )
-        if (this.props.dataStatistics !== null)
+        if (this.props.dataStatistics !== null) {
             dataStatisticsPanel = (
                 <DataTable dataStatistics={this.props.dataStatistics}
                            label={this.state.label}
                            numberFeatures={this.state.numberFeatures}
                            textFeatures={this.state.textFeatures}
                            typeOfProblem={this.state.options.typeOfProblem}
+                           apiVersion={this.props.apiVersion}
                            callback={{
-                               apiVersion: this.props.apiVersion,
                                setLabel: this.onChangeLabel.bind(this),
                                setNumberFeatures: this.onChangeNumberFeatures.bind(this),
                                setTextFeatures: this.onChangeTextFeatures.bind(this),
+                               setAllFeatures: this.setAllAvailableFeatures.bind(this),
+                               setFeaturesEmpty: this.setFeaturesEmpty.bind(this),
                                castToInt: this.props.functions.castToInt
                            }}
                 />
             )
-
+        }
         return (
             <div className="mx-auto w-75 my-2 p-1" style={{backgroundColor: "#cbbebe"}}>
                 <div className="d-flex justify-content-center mb-2 py-2">
@@ -275,7 +293,7 @@ class HomePage extends Component {
                     {optionsPanel}
                 </div>
                 <div className="d-flex mx-2 mb-3 p-2" style={{backgroundColor: "#882457"}}>
-                    <div className="w-75" style={{backgroundColor: "#586367"}} >
+                    <div className="w-75" style={{backgroundColor: "#586367"}}>
                         {hyperparametersPanel}
                     </div>
                     <div className="w-25 px-3">

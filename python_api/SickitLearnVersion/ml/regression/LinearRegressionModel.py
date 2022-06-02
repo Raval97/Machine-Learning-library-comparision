@@ -9,7 +9,6 @@ class LinearRegressionModel:
         if self.hyperparameters is None:
             return linear_model.LinearRegression()
         else:
-            print(self.hyperparameters)
             return linear_model.LinearRegression(
                 fit_intercept=self.hyperparameters.get('fitIntercept', True),
                 copy_X=self.hyperparameters.get('copyX', True),

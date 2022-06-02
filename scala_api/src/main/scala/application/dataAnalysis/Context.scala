@@ -1,6 +1,6 @@
 package application.dataAnalysis
 
-import application.{defaultDirectoryPath, workspaceDirectoryPath}
+import application.workspaceDirectoryPath
 import org.apache.spark.sql.SparkSession
 
 case object Context {
@@ -24,6 +24,8 @@ case object Context {
   private val dataFrameFileName: String = "dataFrame"
   private val modelFileName: String = "pipelineModel"
   private val textFeatureIndexerFileName: String = "textFeatureIndexer"
+
+  val saveModels = true
 
   def getFileNamePath = workspaceDirectoryPath + fileName
 

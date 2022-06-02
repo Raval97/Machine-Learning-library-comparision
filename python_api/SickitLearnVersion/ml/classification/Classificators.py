@@ -2,6 +2,7 @@ import pickle
 
 import numpy as np
 
+import Context
 from Context import getMlModelFilePath_SL
 from Models.ClassificationSummaryResult import ClassificationSummaryResult
 from Models.SummaryResult import SummaryResult
@@ -33,7 +34,8 @@ class Classificators:
     def fitAndPredict(self, regressionModel):
         regressionModel.fit(self.X_train, self.y_train)
         prediction = regressionModel.predict(self.X_test)
-        pickle.dump(regressionModel, open(getMlModelFilePath_SL(), 'wb'))
+        if Context.saveModels:
+            pickle.dump(regressionModel, open(getMlModelFilePath_SL(), 'wb'))
         return prediction
 
     def calculateMetrics(self, predictions):
@@ -43,10 +45,4 @@ class Classificators:
         weightedRecall = recall_score(self.y_test, predictions, average='weighted')
         hammingLoss = hamming_loss(self.y_test, predictions)
         metrics = ClassificationSummaryResult(accuracy, 1.0 - accuracy, precision, f1, weightedRecall, hammingLoss)
-        print("accuracy:", accuracy)
-        print("error:", 1.0 - accuracy)
-        print("precision:", precision)
-        print("f1:", f1)
-        print("weightedRecall:", weightedRecall)
-        print("hammingLoss:", hammingLoss)
         return SummaryResult(classificationMetrics=metrics)

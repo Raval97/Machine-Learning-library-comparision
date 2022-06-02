@@ -3,7 +3,7 @@ package application.dataAnalysis.operations
 import application.dataAnalysis.Context.getDataFilePath
 import application.dataAnalysis.operations.Helpers.ReadWriteFiler.{readData, safeData}
 import application.dataAnalysis.operations.Helpers.StatisticsCreator
-import application.models.DataStatistics
+import application.models.statistics.DataStatistics
 import org.apache.spark.sql.functions.col
 import org.apache.spark.sql.types.IntegerType
 import org.sparkproject.guava.io.Files

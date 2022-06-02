@@ -8,7 +8,7 @@ class RowDataTableOfTextStats extends Component {
         let name = this.props.dataStatistics.name
         let label = ""
         let castToIntButton = ""
-        if (this.props.apiVersion === "Python & Scikit Learn Api") {
+        if (this.props.apiVersion !== "Python & Scikit Learn Api") {
             castToIntButton = (
                 <td className="buttonCell col-2">
                     <Button className="w-100" onClick={() => this.props.callback.castToInt(name)}/>
@@ -38,7 +38,9 @@ class RowDataTableOfTextStats extends Component {
         )
         let count = this.props.dataStatistics.count
         let bestPopularPercentage = Math.round(this.props.dataStatistics.mostCommon[0].count * 10000) / 100
-        let secondPopularPercentage = Math.round(this.props.dataStatistics.mostCommon[1].count * 10000) / 100
+        let secondName = (this.props.dataStatistics.mostCommon[1] === undefined) ? "-" : this.props.dataStatistics.mostCommon[1].name
+        let secondPopularPercentage = (this.props.dataStatistics.mostCommon[1] === undefined) ? 0 :
+            Math.round(this.props.dataStatistics.mostCommon[1].count * 10000) / 100
         return (
             <tr>
                 {label}
@@ -48,7 +50,7 @@ class RowDataTableOfTextStats extends Component {
                 <td className="col-1">{this.props.dataStatistics.distinct}</td>
                 <td className="col-2" style={{borderLeftStyle: "solid"}}>{this.props.dataStatistics.mostCommon[0].name}</td>
                 <td className="col-1" style={{borderRightStyle: "solid"}}>{bestPopularPercentage}</td>
-                <td className="col-2">{this.props.dataStatistics.mostCommon[1].name}</td>
+                <td className="col-2">{secondName}</td>
                 <td className="col-1" style={{borderRightStyle: "solid"}}>{secondPopularPercentage}</td>
                 {castToIntButton}
             </tr>

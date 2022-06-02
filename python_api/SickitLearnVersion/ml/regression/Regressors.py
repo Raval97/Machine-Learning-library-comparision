@@ -2,6 +2,7 @@ import pickle
 
 from sklearn.metrics import r2_score, mean_squared_error
 
+import Context
 from Context import getMlModelFilePath_SL
 from Models.RegressionSummaryResult import RegressionSummaryResult
 from Models.SummaryResult import SummaryResult
@@ -29,13 +30,12 @@ class Regressors:
     def fitAndPredict(self, regressionModel):
         regressionModel.fit(self.X_train, self.y_train)
         prediction = regressionModel.predict(self.X_test)
-        pickle.dump(regressionModel, open(getMlModelFilePath_SL(), 'wb'))
+        if Context.saveModels:
+            pickle.dump(regressionModel, open(getMlModelFilePath_SL(), 'wb'))
         return prediction
 
     def calculateMetrics(self, predictions):
         rmse = mean_squared_error(self.y_test, predictions)
         r2 = r2_score(self.y_test, predictions)
         metrics = RegressionSummaryResult(r2, rmse)
-        print("r2:", r2)
-        print("rmse:", rmse)
         return SummaryResult(regressionMetrics = metrics)

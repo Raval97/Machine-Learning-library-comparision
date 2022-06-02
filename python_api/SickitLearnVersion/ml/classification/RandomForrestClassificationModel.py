@@ -9,7 +9,6 @@ class RandomForrestClassificationModel:
         if self.hyperparameters is None:
             return ensemble.RandomForestClassifier()
         else:
-            print(self.hyperparameters)
             return ensemble.RandomForestClassifier(
                 n_estimators=self.hyperparameters.get('nEstimators', 100),
                 criterion=self.hyperparameters.get('criterion', "gini"),

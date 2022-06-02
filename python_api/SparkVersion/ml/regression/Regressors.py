@@ -2,6 +2,7 @@ from pyspark.ml import Pipeline
 from pyspark.ml.evaluation import RegressionEvaluator
 from pyspark.ml.feature import VectorIndexer
 
+import Context
 from Models.RegressionSummaryResult import RegressionSummaryResult
 from Models.SummaryResult import SummaryResult
 from SparkVersion.ml.regression.DecisionTreeRegressionModel import DecisionTreeRegressionModel
@@ -33,7 +34,8 @@ class Regressors:
         pipeline = Pipeline().setStages([self.featureIndexer(), regressionModel])
         model = pipeline.fit(self.train)
         predictions = model.transform(self.test)
-        model.write().overwrite().save(getPipelineModelFilePath())
+        if Context.saveModels:
+            model.write().overwrite().save(getPipelineModelFilePath())
         return predictions
 
     @staticmethod
@@ -49,8 +51,6 @@ class Regressors:
         rmse = evaluatorRMSE.evaluate(predictions)
         r2 = evaluatorR2.evaluate(predictions)
         metrics = RegressionSummaryResult(r2, rmse)
-        print("r2:", r2)
-        print("rmse:", rmse)
         return SummaryResult(regressionMetrics = metrics)
 
     def featureIndexer(self):

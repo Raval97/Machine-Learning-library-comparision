@@ -48,12 +48,6 @@ class Classificators:
         weightedRecall = evaluator.setMetricName("weightedRecall").evaluate(predictions)
         hammingLoss = evaluator.setMetricName("hammingLoss").evaluate(predictions)
         metrics = ClassificationSummaryResult(accuracy, 1.0 - accuracy, precision, f1, weightedRecall, hammingLoss)
-        print("accuracy:", accuracy)
-        print("error:", 1.0 - accuracy)
-        print("precision:", precision)
-        print("f1:", f1)
-        print("truePositive:", truePositive)
-        print("falsePositive:", falsePositive)
         return SummaryResult(classificationMetrics=metrics)
 
     def labelIndexer(self):

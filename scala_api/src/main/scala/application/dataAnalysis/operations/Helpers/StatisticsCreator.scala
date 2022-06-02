@@ -1,9 +1,9 @@
 package application.dataAnalysis.operations.Helpers
 
-import application.models.{DataStatistics, IntStringTuple, NumberColumnsSummary, TextColumnsSummary}
+import application.models.statistics.{DataStatistics, IntStringTuple, NumberColumnsSummary, TextColumnsSummary}
 import org.apache.spark.sql.{DataFrame, Row}
 import org.apache.spark.sql.functions.col
-import org.apache.spark.sql.types.StringType
+import org.apache.spark.sql.types.{StringType, TimestampType}
 
 class StatisticsCreator {
 
@@ -12,7 +12,9 @@ class StatisticsCreator {
   }
 
   private def textColumnsSummary(data: DataFrame): Seq[TextColumnsSummary] = {
-    val textColumnNames: Seq[String] = data.schema.filter(x => x.dataType == StringType).map(_.name)
+    val textColumnNames: Seq[String] = data.schema.filter(
+      x => x.dataType == StringType || x.dataType == TimestampType
+    ).map(_.name)
     val textColumn = data.select(textColumnNames.map(col): _*)
     textColumnNames.map(name => {
       val rdd = textColumn.select(name).rdd
@@ -22,7 +24,7 @@ class StatisticsCreator {
         .reduceByKey(_ + _)
         .map { case (s, count) => (count, s) }
         .top(3)(Ordering.by(_._1))
-        .map { case (count, s) => IntStringTuple(count.toDouble/allCount, s.get(0).toString) }
+        .map { case (count, s) => IntStringTuple(count.toDouble / allCount, s.get(0).toString)}
       TextColumnsSummary(name, allCount, distinct, mostCommons.toSet)
     })
   }

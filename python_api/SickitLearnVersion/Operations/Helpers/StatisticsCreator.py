@@ -11,14 +11,18 @@ def createStatisticsSummary(data):
 
 def textColumnsSummary(data):
     textColumns = list(data.select_dtypes(['object']).columns)
-    textColumnsSummaries = [textColumnsSummaryFromNames(name, data) for name in textColumns]
+    categoricalColumnNames = [field for field in data if len(data[field].unique()) < 5]
+    textAndCategoricalColumns = set(textColumns + categoricalColumnNames)
+    textColumnsSummaries = [textColumnsSummaryFromNames(name, data) for name in textAndCategoricalColumns]
     return textColumnsSummaries
 
 
 def numberColumnsSummary(data):
-    numberColumns = list(data.select_dtypes(['float64', 'int64']).columns)
+    numberColumnNames = list(data.select_dtypes(['float64', 'int64']).columns)
+    categoricalColumnNames = [field for field in data if len(data[field].unique()) < 5]
+    noneTextAndCategoricalColumns = set(numberColumnNames) - set(categoricalColumnNames)
     describe = data.describe()
-    numberColumnsSummaries = [numberColumnsSummaryFromNames(name, describe) for name in numberColumns]
+    numberColumnsSummaries = [numberColumnsSummaryFromNames(name, describe) for name in noneTextAndCategoricalColumns]
     return numberColumnsSummaries
 
 
@@ -27,12 +31,15 @@ def textColumnsSummaryFromNames(name, data):
     count = data.count().get(key = name)
     distinct = data.nunique().get(key = name)
     bestName = valueCounts.index[0]
-    bestCount = valueCounts[0]
-    secondName = valueCounts.index[1]
-    secondCount = valueCounts[1]
+    bestCount = valueCounts[bestName]
+    secondName = "-"
+    secondCount = 0
+    if distinct > 1:
+        secondName = valueCounts.index[1]
+        secondCount = valueCounts[secondName]
     mostCommons = [
-        IntStringTuple(bestName, str(bestCount/count)),
-        IntStringTuple(secondName, str(secondCount/count))
+        IntStringTuple(str(bestName), str(bestCount/count)),
+        IntStringTuple(str(secondName), str(secondCount/count))
     ]
     summary = TextColumnsSummary(name, str(count), str(distinct), mostCommons)
     return summary

@@ -1,4 +1,4 @@
-package application.models
+package application.models.statistics
 
 import spray.json.{DefaultJsonProtocol, RootJsonFormat}
 
@@ -13,11 +13,4 @@ trait TextColumnsSummaryJsonProtocol extends DefaultJsonProtocol with IntStringT
   implicit val TextColumnsSummaryFormat: RootJsonFormat[TextColumnsSummary] = jsonFormat4(TextColumnsSummary)
 }
 
-case class IntStringTuple(
- count: Double,
- name: String
-)
 
-trait IntStringTupleJsonProtocol extends DefaultJsonProtocol {
-  implicit val intStringTupleFormat: RootJsonFormat[IntStringTuple] = jsonFormat2(IntStringTuple)
-}

@@ -114,6 +114,7 @@ class LinearRegression extends Component {
                            step={0.05}
                            onChange={this.onChangeRegParam}/>
                 )}
+                colWeight={"col-6"}
             />
         )
         let fitInterceptSelector = (
@@ -127,6 +128,7 @@ class LinearRegression extends Component {
                         <option value={false}>False</option>
                     </select>
                 )}
+                colWeight={"col-6"}
             />
         )
         let standardizationSelector = (
@@ -144,6 +146,7 @@ class LinearRegression extends Component {
                         <option value={false}>False</option>
                     </select>
                 )}
+                colWeight={"col-6"}
             />
         )
         let elasticNetParamSelector = (
@@ -162,6 +165,7 @@ class LinearRegression extends Component {
                            step={0.05}
                            onChange={this.onChangeElasticNetParam}/>
                 )}
+                colWeight={"col-6"}
             />
         )
         let maxIterSelector = (
@@ -177,6 +181,7 @@ class LinearRegression extends Component {
                            step={1}
                            onChange={this.onChangeMaxIter}/>
                 )}
+                colWeight={"col-6"}
             />
         )
         let tolSelector = (
@@ -193,6 +198,7 @@ class LinearRegression extends Component {
                            step={0.000001}
                            onChange={this.onChangeTol}/>
                 )}
+                colWeight={"col-6"}
             />
         )
         let solverSelector = (
@@ -216,6 +222,7 @@ class LinearRegression extends Component {
                         <option value="l-bfgs">LBFGS</option>
                     </select>
                 )}
+                colWeight={"col-6"}
             />
         )
         let lossSelector = (
@@ -229,7 +236,7 @@ class LinearRegression extends Component {
                         <option value="huber">Huber</option>
                     </select>
                 )}
-                labelWeight={40}
+                colWeight={"col-6"}
             />
         )
         let aggregationDepthSelector = (
@@ -247,7 +254,7 @@ class LinearRegression extends Component {
                            step={1}
                            onChange={this.onChangeAggregationDepth}/>
                 )}
-                labelWeight={60}
+                colWeight={"col-6"}
             />
         )
         let epsilonSelector = (
@@ -263,6 +270,7 @@ class LinearRegression extends Component {
                            step={0.05}
                            onChange={this.onChangeEpsilon}/>
                 )}
+                colWeight={"col-6"}
             />
         )
 
@@ -271,20 +279,22 @@ class LinearRegression extends Component {
                 <div className="d-flex mx-auto pb-3">
                     {regParamSelector}
                     {fitInterceptSelector}
-                    {standardizationSelector}
                 </div>
                 <div className="d-flex mx-auto pb-3">
+                    {standardizationSelector}
                     {elasticNetParamSelector}
+                </div>
+                <div className="d-flex mx-auto pb-3">
                     {maxIterSelector}
                     {tolSelector}
                 </div>
                 <div className="d-flex mx-auto pb-3">
                     {solverSelector}
                     {lossSelector}
-                    {epsilonSelector}
                 </div>
                 <div className="d-flex mx-auto pb-3">
                     {aggregationDepthSelector}
+                    {epsilonSelector}
                 </div>
             </div>
         )

@@ -6,12 +6,12 @@ import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
 import akka.http.scaladsl.model.Multipart
 import akka.http.scaladsl.server.Directives.{parameter, _}
 import akka.stream.ActorMaterializer
-import application.dataAnalysis.Context
 import application.dataAnalysis.Context.getFileNamePath
 import application.dataAnalysis.operations.{CreateModelOperation, PredictOperation, ReadFileOperation, UpdateDataOperation}
 import application.defaultDirectoryPath
 import application.models.SummaryOfMerics.SummaryResultJsonProtocol
 import application.models._
+import application.models.statistics.DataStatisticsJsonProtocol
 import ch.megard.akka.http.cors.scaladsl.CorsDirectives.cors
 
 import scala.concurrent.Future
@@ -30,7 +30,7 @@ object Router extends SprayJsonSupport
     cors() {
       (path("upload") & extractLog) { log =>
         entity(as[Multipart.FormData]) { formData =>
-          onComplete(UploadFileOperation(log, formData)) {
+        onComplete(UploadFileOperation(log, formData)) {
             case Success(_) =>
               log.info(s"Read file and make statistics")
               complete(ReadFileOperation(getFileNamePath))
