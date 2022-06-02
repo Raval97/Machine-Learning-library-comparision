@@ -2,6 +2,7 @@ from pyspark.sql import SparkSession
 
 spark = SparkSession.builder.appName('app').getOrCreate()
 
+saveModels = True
 workspaceDirectoryPath = "../../data_sets/workspace/spark/"
 workspaceDirectoryPath_SL = "../../data_sets/workspace/scikit-learn/"
 defaultDirectoryPath = "../../data_sets/default/"

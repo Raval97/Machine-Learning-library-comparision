@@ -1,5 +1,6 @@
 package application.dataAnalysis.ml.regression
 
+import application.dataAnalysis.Context
 import application.dataAnalysis.interfaces.{ModelCreateProcess, ModelPrepare}
 import application.dataAnalysis.ml.ClassificatorsAndRegressors
 import application.models.Hyperparameters
@@ -13,14 +14,14 @@ case class Regressors(
  override val data: DataFrame,
  override val train: Dataset[Row],
  override val test: Dataset[Row],
- override val maxCategories: Option[Int] = None
-) extends ClassificatorsAndRegressors(data, train, test, maxCategories) with ModelCreateProcess {
+) extends ClassificatorsAndRegressors(data, train, test) with ModelCreateProcess {
 
   override def makeFitAndTransform(regressionModel: PipelineStage with MLWritable): DataFrame = {
     pipeline.setStages(Array(featureIndexer, regressionModel))
     val model: PipelineModel = pipeline.fit(train)
     val predictions: DataFrame = model.transform(test)
-    safeResources(model)
+    if (Context.saveModels)
+      safeResources(model)
     predictions
   }
 

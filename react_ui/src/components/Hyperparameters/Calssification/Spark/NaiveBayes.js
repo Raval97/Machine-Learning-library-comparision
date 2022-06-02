@@ -42,6 +42,7 @@ class NaiveBayes extends Component {
                            step={0.05}
                            onChange={this.onChangeSmoothing}/>
                 )}
+                colWeight={"col-6"}
             />
         )
         let modelTypeSelector = (
@@ -57,7 +58,7 @@ class NaiveBayes extends Component {
                         <option value="complement">Complement</option>
                     </select>
                 )}
-                labelWeight={40}
+                colWeight={"col-6"}
             />
         )
 

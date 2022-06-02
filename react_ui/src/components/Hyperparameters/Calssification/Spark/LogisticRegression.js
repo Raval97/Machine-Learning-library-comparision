@@ -105,6 +105,7 @@ class LogisticRegression extends Component {
                            step={0.05}
                            onChange={this.onChangeRegParam}/>
                 )}
+                colWeight={"col-6"}
             />
         )
         let fitInterceptSelector = (
@@ -118,6 +119,7 @@ class LogisticRegression extends Component {
                         <option value={false}>False</option>
                     </select>
                 )}
+                colWeight={"col-6"}
             />
         )
         let standardizationSelector = (
@@ -135,6 +137,7 @@ class LogisticRegression extends Component {
                         <option value={false}>False</option>
                     </select>
                 )}
+                colWeight={"col-6"}
             />
         )
         let elasticNetParamSelector = (
@@ -153,6 +156,7 @@ class LogisticRegression extends Component {
                            step={0.05}
                            onChange={this.onChangeElasticNetParam}/>
                 )}
+                colWeight={"col-6"}
             />
         )
         let maxIterSelector = (
@@ -168,6 +172,7 @@ class LogisticRegression extends Component {
                            step={1}
                            onChange={this.onChangeMaxIter}/>
                 )}
+                colWeight={"col-6"}
             />
         )
         let tolSelector = (
@@ -184,6 +189,7 @@ class LogisticRegression extends Component {
                            step={0.000001}
                            onChange={this.onChangeTol}/>
                 )}
+                colWeight={"col-6"}
             />
         )
         let familySelector = (
@@ -203,6 +209,7 @@ class LogisticRegression extends Component {
                         <option value="multinomial">Multinomial</option>
                     </select>
                 )}
+                colWeight={"col-6"}
             />
         )
         let aggregationDepthSelector = (
@@ -220,6 +227,7 @@ class LogisticRegression extends Component {
                            step={1}
                            onChange={this.onChangeAggregationDepth}/>
                 )}
+                colWeight={"col-6"}
             />
         )
         let thresholdSelector = (
@@ -242,6 +250,7 @@ class LogisticRegression extends Component {
                            step={0.05}
                            onChange={this.onChangeThreshold}/>
                 )}
+                colWeight={"col-6"}
             />
         )
 
@@ -250,16 +259,20 @@ class LogisticRegression extends Component {
                 <div className="d-flex mx-auto pb-3">
                     {regParamSelector}
                     {fitInterceptSelector}
-                    {standardizationSelector}
                 </div>
                 <div className="d-flex mx-auto pb-3">
+                    {standardizationSelector}
                     {elasticNetParamSelector}
+                </div>
+                <div className="d-flex mx-auto pb-3">
                     {maxIterSelector}
                     {tolSelector}
                 </div>
                 <div className="d-flex mx-auto pb-3">
                     {familySelector}
                     {thresholdSelector}
+                </div>
+                <div className="d-flex mx-auto pb-3">
                     {aggregationDepthSelector}
                 </div>
             </div>

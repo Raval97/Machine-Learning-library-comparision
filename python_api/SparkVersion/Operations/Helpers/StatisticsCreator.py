@@ -1,5 +1,5 @@
 from pyspark.sql.functions import col
-from pyspark.sql.types import StringType
+from pyspark.sql.types import StringType, TimestampType
 from pyspark.sql import functions as F
 
 from Models.DataStatistics import DataStatistics
@@ -13,14 +13,18 @@ def createStatisticsSummary(data):
 
 
 def textColumnsSummary(data):
-    textColumnNames = [field.name for field in data.schema.fields if (isinstance(field.dataType, StringType))]
+    textColumnNames = [field.name for field in data.schema.fields if (
+        isinstance(field.dataType, StringType) or isinstance(field.dataType, TimestampType)
+    )]
     textColumn = data.select(*textColumnNames)
     textColumnsSummaries = [textColumnsSummaryFromNames(name, textColumn) for name in textColumnNames]
     return textColumnsSummaries
 
 
 def numberColumnsSummary(data):
-    numberColumnNames = [field.name for field in data.schema.fields if not (isinstance(field.dataType, StringType))]
+    numberColumnNames = [field.name for field in data.schema.fields if not (
+        isinstance(field.dataType, StringType) or isinstance(field.dataType, TimestampType)
+    )]
     numberColumn = data.select(*numberColumnNames)
     summary = numberColumn.summary()
     numberColumnsSummaries = [numberColumnsSummaryFromNames(name, summary) for name in numberColumnNames]
@@ -36,8 +40,11 @@ def textColumnsSummaryFromNames(name, textColumn):
     distinct = df_temp.count()
     bestName = df_temp.collect()[0].__getitem__(name)
     bestCount = df_temp.collect()[0].__getitem__("frequency")
-    secondName = df_temp.collect()[1].__getitem__(name)
-    secondCount = df_temp.collect()[1].__getitem__("frequency")
+    secondName = "-"
+    secondCount = 0
+    if distinct > 1:
+        secondName = df_temp.collect()[1].__getitem__(name)
+        secondCount = df_temp.collect()[1].__getitem__("frequency")
     mostCommons = [
         IntStringTuple(bestName, bestCount),
         IntStringTuple(secondName, secondCount)

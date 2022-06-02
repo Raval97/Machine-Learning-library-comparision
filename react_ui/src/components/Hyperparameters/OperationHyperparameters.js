@@ -45,7 +45,6 @@ class OperationHyperparameters extends Component {
             linearRegressionModel: parameters
         })
         this.props.actualizeHyperparameters(this.state)
-        console.log(this.state.linearRegressionModel)
     }
 
     onChangeGeneralizedLinearRegression(parameters) {
@@ -53,7 +52,6 @@ class OperationHyperparameters extends Component {
             generalizedLinearRegressionModel: parameters
         })
         this.props.actualizeHyperparameters(this.state)
-        console.log(this.state.generalizedLinearRegressionModel)
     }
 
     onChangeDecisionTreeRegModel(parameters) {
@@ -61,7 +59,6 @@ class OperationHyperparameters extends Component {
             decisionTreeRegModel: parameters
         })
         this.props.actualizeHyperparameters(this.state)
-        console.log(this.state.decisionTreeRegModel)
     }
 
     onChangeRandomForrestRegModel(parameters) {
@@ -69,7 +66,6 @@ class OperationHyperparameters extends Component {
             randomForrestRegModel: parameters
         })
         this.props.actualizeHyperparameters(this.state)
-        console.log(this.state.randomForrestRegModel)
     }
 
     onChangeLogisticRegressionModel(parameters) {
@@ -77,7 +73,6 @@ class OperationHyperparameters extends Component {
             logisticRegressionModel: parameters
         })
         this.props.actualizeHyperparameters(this.state)
-        console.log(this.state.logisticRegressionModel)
     }
 
     onChangeNaiveBayesModel(parameters) {
@@ -85,7 +80,6 @@ class OperationHyperparameters extends Component {
             naiveBayesModel: parameters
         })
         this.props.actualizeHyperparameters(this.state)
-        console.log(this.state.naiveBayesModel)
     }
 
     onChangeDecisionTreeClassModel(parameters) {
@@ -93,7 +87,6 @@ class OperationHyperparameters extends Component {
             decisionTreeClassModel: parameters
         })
         this.props.actualizeHyperparameters(this.state)
-        console.log(this.state.decisionTreeClassModel)
     }
 
     onChangeRandomForrestClassModel(parameters) {
@@ -101,7 +94,6 @@ class OperationHyperparameters extends Component {
             randomForrestClassModel: parameters
         })
         this.props.actualizeHyperparameters(this.state)
-        console.log(this.state.randomForrestClassModel)
     }
 
     getHyperParams() {

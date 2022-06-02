@@ -2,9 +2,9 @@ from flask import Flask, json, request, redirect
 from flask_cors import CORS
 
 import Context
-from SickitLearnVersion.Operations.ReadFileOperation import readFile as ScikitLearn_readFile
 from SickitLearnVersion.Operations.CreateModelOperation import createModel as ScikitLearn_createModel
 from SickitLearnVersion.Operations.PredictOperation import predict as ScikitLearn_predict
+from SickitLearnVersion.Operations.ReadFileOperation import readFile as ScikitLearn_readFile
 from SparkVersion.Operations.CreateModelOperation import createModel as Spark_createModel
 from SparkVersion.Operations.PredictOperation import predict as Spark_predict
 from SparkVersion.Operations.ReadFileOperation import readFile as Spark_readFile

@@ -9,7 +9,6 @@ class DecisionTreeRegressionModel:
         if self.hyperparameters is None:
             return tree.DecisionTreeRegressor()
         else:
-            print(self.hyperparameters)
             return tree.DecisionTreeRegressor(
                 criterion=self.hyperparameters.get('criterion', "squared_error"),
                 splitter=self.hyperparameters.get('splitter', "best"),

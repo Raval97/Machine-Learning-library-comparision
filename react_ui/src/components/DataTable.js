@@ -9,14 +9,22 @@ class DataTable extends Component {
         let numberFeaturesLabel = ""
         let textFeaturesLabel = ""
         if (this.props.typeOfProblem === "Regression")
-            numberFeaturesLabel = <th>Label</th>
+            numberFeaturesLabel = (
+                <th>
+                    <div onClick={() => this.props.callback.setFeaturesEmpty()}>Label</div>
+                </th>
+            )
         else
-            textFeaturesLabel = <th className="align-middle" rowSpan="2">Label</th>
+            textFeaturesLabel = (
+                    <th className="align-middle" rowSpan="2">
+                        <div onClick={() => this.props.callback.setFeaturesEmpty()}>Label</div>
+                    </th>
+            )
         var numberColumnStatistics = <tr/>
         var textColumnStatistics = <tr/>
         if (this.props.dataStatistics !== null) {
             let copyOfDataStatistics = {...this.props.dataStatistics};
-            numberColumnStatistics = copyOfDataStatistics.numberColumnsSummary
+            numberColumnStatistics = copyOfDataStatistics.numberColumnsSummary.sort((a, b) => a.name > b.name)
                 .map((row, iter) => {
                     return <RowDataTableOfNumberStats key={iter} id={iter}
                                                       dataStatistics={row}
@@ -26,7 +34,7 @@ class DataTable extends Component {
                                                       callback={this.props.callback}/>
                 })
 
-            textColumnStatistics = copyOfDataStatistics.textColumnSummary
+            textColumnStatistics = copyOfDataStatistics.textColumnSummary.sort((a, b) => a.name > b.name)
                 .map((row, iter) => {
                     return <RowDataTableOfTextStats key={iter} id={iter}
                                                     apiVersion={this.props.apiVersion}
@@ -41,10 +49,10 @@ class DataTable extends Component {
         let numberStatsTable = <div className="w-100 mb-2 py-1" style={{backgroundColor: "#3c941a"}}/>
         let textStatsTable = <div className="w-100 mb-2 py-1" style={{backgroundColor: "#3c941a"}}/>
         let castToNumber = ""
-        if (this.props.apiVersion === "Python & Scikit Learn Api") {
+        if (this.props.apiVersion !== "Python & Scikit Learn Api") {
             castToNumber = (
                 <th className="align-middle" rowSpan="2"
-                        style={{backgroundColor: "#53b68a"}}>
+                    style={{backgroundColor: "#53b68a"}}>
                     Cast to Number
                 </th>
             )
@@ -55,7 +63,11 @@ class DataTable extends Component {
                     <thead style={{backgroundColor: "#9fd3bc"}}>
                     <tr>
                         {numberFeaturesLabel}
-                        <th>Feature</th>
+                        <th>
+                            <div onClick={() => this.props.callback.setAllFeatures()}>
+                                Feature
+                            </div>
+                        </th>
                         <th>Param</th>
                         <th>Count</th>
                         <th>Mean</th>
@@ -77,13 +89,17 @@ class DataTable extends Component {
             textStatsTable = (
                 <table className="table table-striped table-light" style={{fontSize: "1vw"}}>
                     <thead style={{backgroundColor: "#9fd3bc"}}>
-                    <tr className="text-center">
+                    <tr>
                         {textFeaturesLabel}
-                        <th className="align-middle" rowSpan="2">Feature</th>
+                        <th className="align-middle" rowSpan="2">
+                            <div onClick={() => this.props.callback.setAllFeatures()}>
+                                Feature
+                            </div>
+                        </th>
                         <th className="align-middle" rowSpan="2">Param</th>
                         <th className="align-middle" rowSpan="2">Count</th>
                         <th className="align-middle" rowSpan="2">Distinct</th>
-                        <th className="align-items-center justify-content-center" colSpan="4"
+                        <th className="align-items-center justify-content-center text-center" colSpan="4"
                             style={{borderLeftStyle: "solid", borderRightStyle: "solid"}}>
                             MostCommon
                         </th>

@@ -9,7 +9,6 @@ class RandomForrestRegressionModel:
         if self.hyperparameters is None:
             return ensemble.RandomForestRegressor()
         else:
-            print(self.hyperparameters)
             return ensemble.RandomForestRegressor(
                 n_estimators=self.hyperparameters.get('nEstimators', 100),
                 criterion=self.hyperparameters.get('criterion', "squared_error"),

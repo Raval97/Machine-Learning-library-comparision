@@ -9,7 +9,6 @@ class DecisionTreeClassificationModel:
         if self.hyperparameters is None:
             return tree.DecisionTreeClassifier()
         else:
-            print(self.hyperparameters)
             return tree.DecisionTreeClassifier(
                 criterion=self.hyperparameters.get('criterion', "squared_error"),
                 splitter=self.hyperparameters.get('splitter', "best"),

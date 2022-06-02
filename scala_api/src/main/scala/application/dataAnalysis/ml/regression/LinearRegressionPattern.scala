@@ -18,7 +18,7 @@ case class LinearRegressionPattern(
   loss: Option[String] = None,
   epsilon: Option[Double] = None
 ) extends ModelPrepare {
-  override def prepareModel: PipelineStage with MLWritable =
+  override def prepareModel: PipelineStage with MLWritable = {
     new LinearRegression()
       .setRegParam(regParam.getOrElse(0.0))
       .setFitIntercept(fitIntercept.getOrElse(true))
@@ -32,6 +32,7 @@ case class LinearRegressionPattern(
       .setEpsilon(epsilon.getOrElse(1.35))
       .setFeaturesCol("indexedFeatures")
       .setLabelCol("label")
+  }
 }
 
 trait LinearPatternJsonProtocol extends DefaultJsonProtocol {

@@ -1,11 +1,12 @@
 package application.dataAnalysis.ml.classification
 
+import application.dataAnalysis.Context
 import application.dataAnalysis.interfaces.{ModelCreateProcess, ModelPrepare}
 import application.dataAnalysis.ml.ClassificatorsAndRegressors
 import application.models.Hyperparameters
 import application.models.SummaryOfMerics.{ClassificationSummaryResult, SummaryResult}
 import org.apache.spark.ml.PipelineStage
-import org.apache.spark.ml.evaluation.{BinaryClassificationEvaluator, MulticlassClassificationEvaluator}
+import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
 import org.apache.spark.ml.feature._
 import org.apache.spark.ml.util.MLWritable
 import org.apache.spark.sql.{DataFrame, Dataset, Row}
@@ -14,14 +15,14 @@ case class Classificators(
  override val data: DataFrame,
  override val train: Dataset[Row],
  override val test: Dataset[Row],
- override val maxCategories: Option[Int] = None
-) extends ClassificatorsAndRegressors(data, train, test, maxCategories) with ModelCreateProcess {
+) extends ClassificatorsAndRegressors(data, train, test) with ModelCreateProcess {
 
   override def makeFitAndTransform(classificationModel: PipelineStage with MLWritable): DataFrame = {
     pipeline.setStages(Array(labelIndexer, featureIndexer, classificationModel, labelConverter))
-    val model = pipeline.fit(train) // requirement failed: DecisionTree requires maxBins (= 32) to be at least as large as the number of values in each categorical feature
+    val model = pipeline.fit(train)
     val predictions: DataFrame = model.transform(test)
-    safeResources(model)
+    if (Context.saveModels)
+      safeResources(model)
     predictions
   }
 
@@ -44,13 +45,6 @@ case class Classificators(
     val f1 = evaluator.setMetricName("f1").evaluate(predictions)
     val weightedRecall = evaluator.setMetricName("weightedRecall").evaluate(predictions)
     val hammingLoss = evaluator.setMetricName("hammingLoss").evaluate(predictions)
-    println(s"accuracy  $accuracy")
-    println(s"error  ${1.0 - accuracy}")
-    println(s"precision  $precision")
-    println(s"f1  $f1")
-    println(s"weightedRecall  $weightedRecall")
-    println(s"falsePositive  $hammingLoss")
-
     val metrics = ClassificationSummaryResult(accuracy, 1.0 - accuracy, precision, f1, weightedRecall, hammingLoss)
     SummaryResult(classificationMetrics = Some(metrics))
   }

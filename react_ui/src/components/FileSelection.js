@@ -45,6 +45,19 @@ class FileSelection extends Component {
                     </div>
                 </div>
             )
+        let yellow_tripdata_21_03 = (this.props.apiVersion === "Python & Scikit Learn Api") ?
+            <option value="yellow_tripdata_2021-03.csv">Yellow trip data 2021-03</option> :
+            <option value="yellow_tripdata_2021-03_df">Yellow trip data 2021-03</option>
+        let yellow_tripdata_22_02 = (this.props.apiVersion === "Python & Scikit Learn Api") ?
+            <option value="yellow_tripdata_2022-02.csv">Yellow trip data 2022-02</option> :
+            <option value="yellow_tripdata_2022-02_df">Yellow trip data 2022-02</option>
+        let yellow_tripdata_16_12 = (this.props.apiVersion === "Python & Scikit Learn Api") ?
+            <option value="yellow_tripdata_2016-12.csv">Yellow trip data 2016-12</option> :
+            <option value="yellow_tripdata_2016-12_df">Yellow trip data 2016-12</option>
+        let creditcard = (this.props.apiVersion === "Python & Scikit Learn Api") ?
+            <option value="creditcard.csv">Credit Card</option> :
+            <option value="creditcard_df">Credit Card</option>
+
         let loadFile = (
             <div className="d-flex">
                 <div className="input-group w-75">
@@ -52,8 +65,12 @@ class FileSelection extends Component {
                         <select className="custom-select col-12" id="inputGroupSelect01"
                                 onChange={(e) => this.onChangeFileSelectedName(e)}
                                 value={this.state.fileSelectedName}>
-                            <option value="bike_sharing.csv">bike_sharing</option>
-                            <option value="Video_Games_Sales_as_at_22_Dec_2016.csv">Video_Games_Sales</option>
+                            <option value="bike_sharing.csv">Bike sharing</option>
+                            <option value="Video_Games_Sales_as_at_22_Dec_2016.csv">Video games sales</option>
+                            {creditcard}
+                            {yellow_tripdata_21_03}
+                            {yellow_tripdata_22_02}
+                            {yellow_tripdata_16_12}
                         </select>
                     </div>
                     <Button variant="info w-25" type="submit"

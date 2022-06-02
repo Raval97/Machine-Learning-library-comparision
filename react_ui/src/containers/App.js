@@ -59,7 +59,7 @@ class App extends Component {
     }
 
     async uploadFile(param) {
-        console.log(param)
+        console.log(param.fileSelected.name)
         let port = this.getPort()
         let apiVersion = this.getApiVersion()
         let targetUrl = 'http://localhost:' + port + apiVersion + '/upload'
@@ -117,7 +117,6 @@ class App extends Component {
 
     async predict(typeOfProblem, method, numberFeaturesValue,
                   textFeaturesValue, numberFeaturesNames, textFeaturesNames) {
-        console.log("predict")
         let port = this.getPort()
         let apiVersion = this.getApiVersion()
         let targetUrl = 'http://localhost:' + port + apiVersion + '/predict'
@@ -133,7 +132,6 @@ class App extends Component {
                 'Content-Type': 'application/json',
             },
         }).then((response) => {
-            console.log(response.data)
             this.setState({predictedLabel: response.data})
         }, (error) => {
             console.log(error)

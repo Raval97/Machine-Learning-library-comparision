@@ -5,7 +5,6 @@ import {Button} from "react-bootstrap";
 class PredictComponent extends Component {
 
     render() {
-        console.log(this.props)
         let predictedLabel = <div/>
         if (this.props.predictedLabel !== null)
             predictedLabel = (

@@ -1,4 +1,4 @@
-package application.models
+package application.models.statistics
 
 import spray.json.{DefaultJsonProtocol, RootJsonFormat}
 

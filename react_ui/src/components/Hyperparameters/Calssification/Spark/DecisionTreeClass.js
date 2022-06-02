@@ -97,6 +97,7 @@ class DecisionTreeClass extends Component {
                            step={1}
                            onChange={this.onChangeMaxDepth}/>
                 )}
+                colWeight={"col-6"}
             />
         )
         let maxBinsSelector = (
@@ -114,6 +115,7 @@ class DecisionTreeClass extends Component {
                            step={1}
                            onChange={this.onChangeMaxBins}/>
                 )}
+                colWeight={"col-6"}
             />
         )
         let minInstancesPerNodeSelector = (
@@ -131,7 +133,8 @@ class DecisionTreeClass extends Component {
                            step={1}
                            onChange={this.onChangeMinInstancesPerNode}/>
                 )}
-                labelWeight={65}
+                colWeight={"col-6"}
+
             />
         )
         let minWeightFractionPerNodeSelector = (
@@ -142,7 +145,7 @@ class DecisionTreeClass extends Component {
                     "minWeightFractionPerNode, the split will be discarded as invalid. " +
                     "Should be in the interval [0.0, 0.5). (default = 0.0)"}
                 input={(
-                    <input className="col-12" type="number"
+                    <input className="col-10" type="number"
                            placeholder={this.state.minWeightFractionPerNode}
                            value={this.state.minWeightFractionPerNode}
                            min={0}
@@ -150,7 +153,8 @@ class DecisionTreeClass extends Component {
                            step={0.05}
                            onChange={this.onChangeMinWeightFractionPerNode}/>
                 )}
-                labelWeight={75}
+                colWeight={"col-6"}
+
             />
         )
         let minInfoGainSelector = (
@@ -167,6 +171,7 @@ class DecisionTreeClass extends Component {
                            step={0.05}
                            onChange={this.onChangeMinInfoGain}/>
                 )}
+                colWeight={"col-6"}
             />
         )
         let maxMemoryInMBSelector = (
@@ -183,7 +188,8 @@ class DecisionTreeClass extends Component {
                            step={64}
                            onChange={this.onChangeMaxMemoryInMB}/>
                 )}
-                labelWeight={60}
+                colWeight={"col-6"}
+
             />
         )
         let cacheNodeIdsSelector = (
@@ -199,6 +205,7 @@ class DecisionTreeClass extends Component {
                         <option value={false}>False</option>
                     </select>
                 )}
+                colWeight={"col-6"}
             />
         )
         let checkpointIntervalSelector = (
@@ -216,7 +223,7 @@ class DecisionTreeClass extends Component {
                            step={1}
                            onChange={this.onChangeCheckpointInterval}/>
                 )}
-                labelWeight={65}
+                colWeight={"col-6"}
             />
         )
 
@@ -225,10 +232,12 @@ class DecisionTreeClass extends Component {
                 <div className="d-flex mx-auto pb-3">
                     {maxDepthSelector}
                     {maxBinsSelector}
-                    {minInstancesPerNodeSelector}
                 </div>
                 <div className="d-flex mx-auto pb-3">
+                    {minInstancesPerNodeSelector}
                     {minInfoGainSelector}
+                </div>
+                <div className="d-flex mx-auto pb-3">
                     {checkpointIntervalSelector}
                     {maxMemoryInMBSelector}
                 </div>

@@ -136,6 +136,7 @@ class RandomForrestReg extends Component {
                            step={1}
                            onChange={this.onChangeNumTrees}/>
                 )}
+                colWeight={"col-6"}
             />
         )
 
@@ -150,6 +151,7 @@ class RandomForrestReg extends Component {
                         <option value={false}>False</option>
                     </select>
                 )}
+                colWeight={"col-6"}
             />
         )
 
@@ -167,6 +169,7 @@ class RandomForrestReg extends Component {
                            step={1}
                            onChange={this.onChangeMaxDepth}/>
                 )}
+                colWeight={"col-6"}
             />
         )
         let minWeightFractionPerNodeSelector = (
@@ -177,7 +180,7 @@ class RandomForrestReg extends Component {
                     "minWeightFractionPerNode, the split will be discarded as invalid. " +
                     "Should be in the interval [0.0, 0.5). (default = 0.0)"}
                 input={(
-                    <input className="col-12" type="number"
+                    <input className="col-10" type="number"
                            placeholder={this.state.minWeightFractionPerNode}
                            value={this.state.minWeightFractionPerNode}
                            min={0}
@@ -185,7 +188,7 @@ class RandomForrestReg extends Component {
                            step={0.05}
                            onChange={this.onChangeMinWeightFractionPerNode}/>
                 )}
-                labelWeight={75}
+                colWeight={"col-6"}
             />
         )
         let maxBinsSelector = (
@@ -203,6 +206,7 @@ class RandomForrestReg extends Component {
                            step={1}
                            onChange={this.onChangeMaxBins}/>
                 )}
+                colWeight={"col-6"}
             />
         )
         let minInstancesPerNodeSelector = (
@@ -220,7 +224,7 @@ class RandomForrestReg extends Component {
                            step={1}
                            onChange={this.onChangeMinInstancesPerNode}/>
                 )}
-                labelWeight={65}
+                colWeight={"col-6"}
             />
         )
         let minInfoGainSelector = (
@@ -237,6 +241,7 @@ class RandomForrestReg extends Component {
                            step={0.05}
                            onChange={this.onChangeMinInfoGain}/>
                 )}
+                colWeight={"col-6"}
             />
         )
         let maxMemoryInMBSelector = (
@@ -253,7 +258,7 @@ class RandomForrestReg extends Component {
                            step={64}
                            onChange={this.onChangeMaxMemoryInMB}/>
                 )}
-                labelWeight={60}
+                colWeight={"col-6"}
             />
         )
         let cacheNodeIdsSelector = (
@@ -269,6 +274,7 @@ class RandomForrestReg extends Component {
                         <option value={false}>False</option>
                     </select>
                 )}
+                colWeight={"col-6"}
             />
         )
         let checkpointIntervalSelector = (
@@ -286,7 +292,7 @@ class RandomForrestReg extends Component {
                            step={1}
                            onChange={this.onChangeCheckpointInterval}/>
                 )}
-                labelWeight={65}
+                colWeight={"col-6"}
             />
         )
 
@@ -303,6 +309,7 @@ class RandomForrestReg extends Component {
                            step={0.05}
                            onChange={this.onChangeSubsamplingRate}/>
                 )}
+                colWeight={"col-6"}
             />
         )
 
@@ -333,7 +340,7 @@ class RandomForrestReg extends Component {
                         <option value={"n"}>N</option>
                     </select>
                 )}
-                labelWeight={65}
+                colWeight={"col-6"}
             />
         )
 
@@ -342,20 +349,24 @@ class RandomForrestReg extends Component {
                 <div className="d-flex mx-auto pb-3">
                     {numTreesSelector}
                     {bootstrapSelector}
-                    {maxDepthSelector}
                 </div>
                 <div className="d-flex mx-auto pb-3">
+                    {maxDepthSelector}
                     {maxBinsSelector}
+                </div>
+                <div className="d-flex mx-auto pb-3">
                     {minInstancesPerNodeSelector}
                     {minWeightFractionPerNodeSelector}
                 </div>
                 <div className="d-flex mx-auto pb-3">
                     {minInfoGainSelector}
                     {maxMemoryInMBSelector}
-                    {cacheNodeIdsSelector}
                 </div>
                 <div className="d-flex mx-auto pb-3">
+                    {cacheNodeIdsSelector}
                     {checkpointIntervalSelector}
+                </div>
+                <div className="d-flex mx-auto pb-3">
                     {subsamplingRateSelector}
                     {featureSubsetStrategySelector}
                 </div>

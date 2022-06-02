@@ -2,7 +2,6 @@ package application.dataAnalysis.ml.regression
 
 import application.dataAnalysis.interfaces.ModelPrepare
 import org.apache.spark.ml.PipelineStage
-import org.apache.spark.ml.classification.{DecisionTreeClassifier, NaiveBayes, RandomForestClassifier}
 import org.apache.spark.ml.regression.RandomForestRegressor
 import org.apache.spark.ml.util.MLWritable
 import spray.json.{DefaultJsonProtocol, RootJsonFormat}

@@ -99,6 +99,7 @@ class GeneralizedLinearRegression extends Component {
                         <option value="tweedie">Tweedie</option>
                     </select>
                 )}
+                colWeight={"col-6"}
             />
         )
         let variancePowerSelector = (
@@ -115,6 +116,7 @@ class GeneralizedLinearRegression extends Component {
                            step={0.05}
                            onChange={this.onChangeVariancePower}/>
                 )}
+                colWeight={"col-6"}
             />
         )
         let maxIterSelector = (
@@ -130,6 +132,7 @@ class GeneralizedLinearRegression extends Component {
                            step={1}
                            onChange={this.onChangeMaxIter}/>
                 )}
+                colWeight={"col-6"}
             />
         )
         let regParamSelector = (
@@ -145,6 +148,7 @@ class GeneralizedLinearRegression extends Component {
                            step={0.05}
                            onChange={this.onChangeRegParam}/>
                 )}
+                colWeight={"col-6"}
             />
         )
         let tolSelector = (
@@ -161,6 +165,7 @@ class GeneralizedLinearRegression extends Component {
                            step={0.000001}
                            onChange={this.onChangeTol}/>
                 )}
+                colWeight={"col-6"}
             />
         )
         let solverSelector = (
@@ -184,6 +189,7 @@ class GeneralizedLinearRegression extends Component {
                         <option value="l-bfgs">LBFGS</option>
                     </select>
                 )}
+                colWeight={"col-6"}
             />
         )
         let fitInterceptSelector = (
@@ -197,6 +203,7 @@ class GeneralizedLinearRegression extends Component {
                         <option value={false}>False</option>
                     </select>
                 )}
+                colWeight={"col-6"}
             />
         )
         let aggregationDepthSelector = (
@@ -214,6 +221,7 @@ class GeneralizedLinearRegression extends Component {
                            step={1}
                            onChange={this.onChangeAggregationDepth}/>
                 )}
+                colWeight={"col-6"}
             />
         )
 
@@ -222,10 +230,12 @@ class GeneralizedLinearRegression extends Component {
                 <div className="d-flex mx-auto pb-3">
                     {familySelector}
                     {variancePowerSelector}
-                    {maxIterSelector}
                 </div>
                 <div className="d-flex mx-auto pb-3">
+                    {maxIterSelector}
                     {regParamSelector}
+                </div>
+                <div className="d-flex mx-auto pb-3">
                     {tolSelector}
                     {solverSelector}
                 </div>

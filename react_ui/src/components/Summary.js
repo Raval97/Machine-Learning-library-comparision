@@ -20,9 +20,17 @@ class Summary extends Component {
                         <td>RMSE</td>
                         <td>{Math.round(regMetrics.rmse * 1000) / 1000}</td>
                     </tr>
-                    <tr>
-                        <td>Time</td>
-                        <td>{Math.round(this.props.modelTrainedResult.time * 1000) / 1000}</td>
+                    <tr style={{color: "#6ec923"}}>
+                        <td>Time<br/>(prepare data)</td>
+                        <td>{Math.round(this.props.modelTrainedResult.prepareDataTime * 1000) / 1000}</td>
+                    </tr>
+                    <tr style={{color: "#6ec923"}}>
+                        <td>Time<br/>(model training)</td>
+                        <td>{Math.round(this.props.modelTrainedResult.trainingModelTime * 1000) / 1000}</td>
+                    </tr>
+                    <tr style={{color: "#6ec923"}}>
+                        <td>Time<br/>(compute metrics)</td>
+                        <td>{Math.round(this.props.modelTrainedResult.calculateMetricsTime * 1000) / 1000}</td>
                     </tr>
                     </tbody>
                 )
@@ -56,9 +64,17 @@ class Summary extends Component {
                         <td>Hamming Loss</td>
                         <td>{Math.round(classMetrics.hammingLoss * 1000) / 1000}</td>
                     </tr>
-                    <tr className="font-weight-bold">
-                        <td>Time</td>
-                        <td>{Math.round(this.props.modelTrainedResult.time * 1000) / 1000}</td>
+                    <tr style={{color: "#6ec923"}}>
+                        <td>Time<br/>(prepare data)</td>
+                        <td>{Math.round(this.props.modelTrainedResult.prepareDataTime * 1000) / 1000}</td>
+                    </tr>
+                    <tr style={{color: "#6ec923"}}>
+                        <td>Time<br/> (model training)</td>
+                        <td>{Math.round(this.props.modelTrainedResult.trainingModelTime * 1000) / 1000}</td>
+                    </tr>
+                    <tr style={{color: "#6ec923"}}>
+                        <td>Time<br/>(compute metrics)</td>
+                        <td>{Math.round(this.props.modelTrainedResult.calculateMetricsTime * 1000) / 1000}</td>
                     </tr>
                     </tbody>
                 )

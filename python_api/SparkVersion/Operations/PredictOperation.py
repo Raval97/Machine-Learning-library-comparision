@@ -30,10 +30,7 @@ def makePredict(params, index, predictColumn):
     featureIndexer = pipelineModel.stages[index]  # .asInstanceOf[VectorIndexerModel]
     test = prepareDataTest(params)
 
-    test.show(5)
     data2 = textFeatureIndexer.transform(test)
-    data2.printSchema()
-    # data2.show(5)
     data3 = VectorAssembler(
         inputCols=allFeaturesIndexesNames(params),
         outputCol="features"
