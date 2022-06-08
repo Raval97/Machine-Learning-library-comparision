@@ -24,7 +24,7 @@
 ![Image description](data_sets/App_screenshot.png?raw=true)
 
 
-##Information
+## Information
 ### The system enables the use of machine learning functionalities, such as:
 - data analysis
 - normalization method:\
